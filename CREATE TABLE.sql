@@ -299,8 +299,7 @@ CREATE TABLE Complaint (
     C_Type VARCHAR(30) NOT NULL, C_Description CLOB NOT NULL,
     C_PriorityLevel VARCHAR(10) NOT NULL, C_SubmissionChannel VARCHAR(20) NOT NULL,
     C_Status VARCHAR(15) NOT NULL, C_AssignedOfficer VARCHAR(15) NOT NULL,
-    C_Resolution CLOB NOT NULL,
-    P_ID VARCHAR(15) NOT NULL, P_DateOfBirth DATE NOT NULL,
+    C_Resolution CLOB NOT NULL, C_ResolutionDate DATE NOT NULL,
     RF_ID VARCHAR(15) NOT NULL, RF_SubmissionDate DATE NOT NULL,
     FH_ID VARCHAR(15) NOT NULL, FH_DateCreated DATE NOT NULL,
     F_ID VARCHAR(15) NOT NULL, F_Code VARCHAR(10) NOT NULL,
@@ -318,7 +317,6 @@ CREATE TABLE Complaint (
     IA_ID VARCHAR(15) NOT NULL, IA_AccountOpenDate DATE NOT NULL,
     OA_ID VARCHAR(15) NOT NULL, OA_RegistrationDate DATE NOT NULL,
     PRIMARY KEY (C_ID, C_Date),
-    FOREIGN KEY (P_ID, P_DateOfBirth) REFERENCES Person(P_ID, P_DateOfBirth),
     FOREIGN KEY (RF_ID, RF_SubmissionDate) REFERENCES RegistrationForm(RF_ID, RF_SubmissionDate),
     FOREIGN KEY (FH_ID, FH_DateCreated) REFERENCES FundHolding(FH_ID, FH_DateCreated),
     FOREIGN KEY (F_ID, F_Code) REFERENCES Fund(F_ID, F_Code),
@@ -491,4 +489,11 @@ CREATE TABLE E_D_EXP (
     PRIMARY KEY (E_ID, E_HireDate, D_ID, D_DeclarationDate),
     FOREIGN KEY (E_ID, E_HireDate) REFERENCES Employee(E_ID, E_HireDate),
     FOREIGN KEY (D_ID, D_DeclarationDate) REFERENCES Dividend(D_ID, D_DeclarationDate)
+);
+CREATE TABLE P_C_EXP (
+    P_ID VARCHAR(15), P_DateOfBirth DATE,
+    C_ID VARCHAR(15), C_DateOfBirth DATE,
+    PRIMARY KEY (P_ID, P_DateOfBirth, C_ID, C_DateOfBirth),
+    FOREIGN KEY (P_ID, P_DateOfBirth) REFERENCES Person(P_ID, P_DateOfBirth),
+    FOREIGN KEY (C_ID, C_DateOfBirth) REFERENCES Complaint(C_ID, C_Date)
 );
