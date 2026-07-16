@@ -35,7 +35,7 @@ CREATE TABLE Asset (
     PRIMARY KEY (AS_ID, AS_Code)
 );
 
-CREATE TABLE JobAdvertisement (
+CREATE TABLE JobAdvertisment (
     JAD_ID VARCHAR(15), JAD_PostingDate DATE,
     JAD_JobTitle VARCHAR(50) NOT NULL, JAD_Department VARCHAR(50) NOT NULL,
     JAD_EmploymentType VARCHAR(20) NOT NULL, JAD_SalaryType VARCHAR(15) NOT NULL,
@@ -327,7 +327,7 @@ CREATE TABLE Complaint (
     FOREIGN KEY (IP_ID, IP_CreationDate) REFERENCES InvestmentPortfolio(IP_ID, IP_CreationDate),
     FOREIGN KEY (AS_ID, AS_Code) REFERENCES Asset(AS_ID, AS_Code),
     FOREIGN KEY (JAPP_ID, JAPP_SubmissionDate) REFERENCES JobApplication(JAPP_ID, JAPP_SubmissionDate),
-    FOREIGN KEY (JAD_ID, JAD_PostingDate) REFERENCES JobAdvertisement(JAD_ID, JAD_PostingDate),
+    FOREIGN KEY (JAD_ID, JAD_PostingDate) REFERENCES JobAdvertisment(JAD_ID, JAD_PostingDate),
     FOREIGN KEY (JD_ID, JD_CreationDate) REFERENCES JobDescription(JD_ID, JD_CreationDate),
     FOREIGN KEY (T_ID, T_Date) REFERENCES Transaction(T_ID, T_Date),
     FOREIGN KEY (S_ID, S_Period) REFERENCES Statement(S_ID, S_Period),
@@ -397,7 +397,7 @@ CREATE TABLE E_JAD_EXP (
     JAD_ID VARCHAR(15), JAD_PostingDate DATE,
     PRIMARY KEY (E_ID, E_HireDate, JAD_ID, JAD_PostingDate),
     FOREIGN KEY (E_ID, E_HireDate) REFERENCES Employee(E_ID, E_HireDate),
-    FOREIGN KEY (JAD_ID, JAD_PostingDate) REFERENCES JobAdvertisement(JAD_ID, JAD_PostingDate)
+    FOREIGN KEY (JAD_ID, JAD_PostingDate) REFERENCES JobAdvertisment(JAD_ID, JAD_PostingDate)
 );
 CREATE TABLE E_F_EXP (
     E_ID VARCHAR(15), E_HireDate DATE,
@@ -417,7 +417,7 @@ CREATE TABLE JAD_JD_EXP (
     JAD_ID VARCHAR(15), JAD_PostingDate DATE,
     JD_ID VARCHAR(15), JD_CreationDate DATE,
     PRIMARY KEY (JAD_ID, JAD_PostingDate, JD_ID, JD_CreationDate),
-    FOREIGN KEY (JAD_ID, JAD_PostingDate) REFERENCES JobAdvertisement(JAD_ID, JAD_PostingDate),
+    FOREIGN KEY (JAD_ID, JAD_PostingDate) REFERENCES JobAdvertisment(JAD_ID, JAD_PostingDate),
     FOREIGN KEY (JD_ID, JD_CreationDate) REFERENCES JobDescription(JD_ID, JD_CreationDate)
 );
 CREATE TABLE JAPP_JD_EXP (
@@ -460,14 +460,14 @@ CREATE TABLE A_JAD_EXP (
     JAD_ID VARCHAR(15), JAD_PostingDate DATE,
     PRIMARY KEY (A_ID, A_ApplicationDate, JAD_ID, JAD_PostingDate),
     FOREIGN KEY (A_ID, A_ApplicationDate) REFERENCES Applicant(A_ID, A_ApplicationDate),
-    FOREIGN KEY (JAD_ID, JAD_PostingDate) REFERENCES JobAdvertisement(JAD_ID, JAD_PostingDate)
+    FOREIGN KEY (JAD_ID, JAD_PostingDate) REFERENCES JobAdvertisment(JAD_ID, JAD_PostingDate)
 );
 CREATE TABLE JAPP_JAD_EXP (
     JAPP_ID VARCHAR(15), JAPP_SubmissionDate DATE,
     JAD_ID VARCHAR(15), JAD_PostingDate DATE,
     PRIMARY KEY (JAPP_ID, JAPP_SubmissionDate, JAD_ID, JAD_PostingDate),
     FOREIGN KEY (JAPP_ID, JAPP_SubmissionDate) REFERENCES JobApplication(JAPP_ID, JAPP_SubmissionDate),
-    FOREIGN KEY (JAD_ID, JAD_PostingDate) REFERENCES JobAdvertisement(JAD_ID, JAD_PostingDate)
+    FOREIGN KEY (JAD_ID, JAD_PostingDate) REFERENCES JobAdvertisment(JAD_ID, JAD_PostingDate)
 );
 CREATE TABLE E_JAPP_EXP (
     E_ID VARCHAR(15), E_HireDate DATE,
@@ -492,8 +492,8 @@ CREATE TABLE E_D_EXP (
 );
 CREATE TABLE P_C_EXP (
     P_ID VARCHAR(15), P_DateOfBirth DATE,
-    C_ID VARCHAR(15), C_DateOfBirth DATE,
-    PRIMARY KEY (P_ID, P_DateOfBirth, C_ID, C_DateOfBirth),
+    C_ID VARCHAR(15), C_Date DATE,
+    PRIMARY KEY (P_ID, P_DateOfBirth, C_ID, C_Date),
     FOREIGN KEY (P_ID, P_DateOfBirth) REFERENCES Person(P_ID, P_DateOfBirth),
-    FOREIGN KEY (C_ID, C_DateOfBirth) REFERENCES Complaint(C_ID, C_Date)
+    FOREIGN KEY (C_ID, C_Date) REFERENCES Complaint(C_ID, C_Date)
 );
